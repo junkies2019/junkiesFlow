@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import { ChooseButton, Header, Copyright, ConverButton, CodeDropDown } from '../../components';
+import { ChooseButton, Header, Copyright, ConverButton, CodeDropDown, Loader } from '../../components';
+import axios from 'axios';
 import "./Upload.scss";
 
 class Upload extends Component{
@@ -9,16 +10,33 @@ class Upload extends Component{
         this.state = {
             isOpen: false,
             file: "/images/noImage.png",
-            isPreview: false
+            isPreview: false,
+            isLoading: false
         }
-
+        
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(e){
         this.setState({
-            file: URL.createObjectURL(e.target.files[0]),
-            isPreview: true
+            isLoading: true
+        })
+        const data = e.target.files[0];
+        axios.post('https://api.imgur.com/3/image', data, {
+            headers: {'Authorization': 'Client-ID cb210255b3697d2'}
+        })
+        .then((req) => {
+            this.setState({
+                file: req.data.data.link,
+                isPreview: true,
+                isLoading: false
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+            this.setState({
+                isLoading: false
+            })
         })
     }
 
@@ -30,11 +48,12 @@ class Upload extends Component{
                     <div className="previewImageContainer">
                         <img className="previewImage" alt="previewIamge" src={this.state.file}/>
                     </div>
+                    <Loader isLoading={this.state.isLoading}/>
                     <div className="buttonGroupContainer">
                         <ChooseButton onChange={this.handleChange}/>
                         <CodeDropDown icon="/images/code-small.svg" onClick={() => {this.setState(state => {return {isOpen: !state.isOpen}})}} isOpen={this.state.isOpen}/>
                     </div>
-                    <ConverButton icon="/images/upload.svg" text="Convert"/>
+                    <ConverButton text="Convert"/>
                     <Copyright/>
                 </div>
             </div>

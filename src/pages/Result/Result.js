@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import MonacoEditor from 'react-monaco-editor';
-import { Header, Copyright, Button } from '../../components'
+import { Header, Copyright, Button } from '../../components';
 import "./Result.scss";
 
 class Result extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            code: ''
+            code: 'test'
         }
     }
 
@@ -31,7 +31,7 @@ class Result extends Component{
                 <div className="resultContainer">
                     <MonacoEditor
                         id="Editor"
-                        width="100%"
+                        width="1000"
                         height="540"
                         language="jajvascript"
                         theme="vs-dark"
