@@ -1,0 +1,63 @@
+.button--confirm{
+    width: 300px;
+    height: 80px;
+    border-radius: 8px;
+    background-color: #27ae60;
+    outline: none;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    margin-right: 35px;
+}
+
+.button--confirm:hover{
+    background-color: #27ae5fbd;
+}
+
+.button--confirm:focus{
+    outline: none;
+}
+
+.button--cancel{
+    width: 300px;
+    height: 80px;
+    border-radius: 8px;
+    background-color: #e74c3c;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    margin-left: 35px;
+}
+
+.button--cancel:hover{
+    background-color: #e74d3cbb;
+}
+
+.button--cancel:focus{
+    outline: none;
+}
+
+.button__text{
+    font-size: 40px;
+    color:white;
+    margin-right: 33px;
+}
+
+.button--icon{
+    width: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .button--confirm{
+        margin-top: 20px;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    .button--cancel{
+        margin-top: 20px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

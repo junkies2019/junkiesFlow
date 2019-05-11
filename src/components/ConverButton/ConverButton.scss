@@ -1,0 +1,32 @@
+.convertButton{
+    width: 675px;
+    height: 80px;
+    border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 72px;
+    background-color: #27ae60;
+}
+
+.convertButton:hover{
+    background-color: #27ae5fc1;
+}
+
+.convertButton:focus{
+    outline: none;
+}
+
+.convertButton__icon{
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.convertButton__Text{
+    color: white;
+    font-size: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .convertButton{
+        width: 300px;
+    }
+}
