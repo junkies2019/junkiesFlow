@@ -2,12 +2,13 @@ import React, {Component} from "react";
 import MonacoEditor from 'react-monaco-editor';
 import { Header, Copyright, Button } from '../../components';
 import "./Result.scss";
+import axios from "axios";
 
 class Result extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            code: 'test'
+            code: 'Hello, World!'
         }
     }
 
@@ -16,7 +17,18 @@ class Result extends Component{
     }
 
     onChange(value, e) {
-        console.log('onChange', value, e);
+        console.log(value)
+    }
+
+    runDebug(){
+        const data = this.state.code;
+        axios.post('', data)
+        .then((req) => {
+            console.log(req)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     render(){
