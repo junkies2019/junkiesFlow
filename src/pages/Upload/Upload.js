@@ -1,20 +1,20 @@
 import React, {Component} from "react";
 import { ChooseButton, Header, Copyright, ConverButton, CodeDropDown, Loader } from '../../components';
-import { decorate, observable, action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import axios from 'axios';
+import API from '../../api/api';
 import "./Upload.scss";
 
+@inject('code')
+@observer
 class Upload extends Component{
     constructor(props){
         super(props)
-
         this.state = {
             isOpen: false,
             file: "/images/noImage.png",
             isPreview: false,
             isLoading: false,
-            code: 'upload test'
         }
         
         this.handleChange = this.handleChange.bind(this)
@@ -52,12 +52,13 @@ class Upload extends Component{
         const data = {
             img_url: this.state.file
         }
-        axios.post('', data)
+        axios.post(`${API}/v1/convert`, data)
         .then((req) => {
-            console.log(req)
             this.setState({
                 isLoading: false
             })
+            console.log(req.data.data)
+            this.props.code.prototype.text = req.data.data;
             this.props.history.push('/result');
         })
         .catch((err) => {
@@ -81,7 +82,7 @@ class Upload extends Component{
                         <ChooseButton onChange={this.handleChange}/>
                         <CodeDropDown icon="/images/code-small.svg" onClick={() => {this.setState(state => {return {isOpen: !state.isOpen}})}} isOpen={this.state.isOpen}/>
                     </div>
-                    <ConverButton onClick={this.submitConvert} text="Convert"/>
+                    <ConverButton onClick={this.submitConvert.bind(this)} text="Convert"/>
                     <Copyright/>
                 </div>
             </div>
@@ -89,8 +90,4 @@ class Upload extends Component{
     }
 }
 
-decorate(Upload, {
-    code: observable
-})
-
-export default observer(Upload);
+export default Upload;

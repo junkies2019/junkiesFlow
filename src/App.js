@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Upload, Result } from './pages';
+
 import './App.scss';
 
 function App() {
